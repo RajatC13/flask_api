@@ -11,21 +11,22 @@ class LRUC():
         self.lru = []
     def get(self, c):
         temp = self.lru[c]
-        self.lru.pop(c)
+        del self.lru[c]
         self.lru.insert(0, temp)
         return temp
     def put(self, elem):
         if len(self.lru) >= self.limit:
-            self.lru.pop(len(self.lru)-1)
+            del self.lru[len(self.lru)-1]
             self.lru.insert(0,elem)
-        self.lru.insert(0,elem)
+        else:
+            self.lru.insert(0,elem)
 
     def dele(self, index):
         a = self.lru.pop(index)
         return a
 
 
-cache = LRUC(5)
+cache = LRUC(3)
 
 
 parser = reqparse.RequestParser()
